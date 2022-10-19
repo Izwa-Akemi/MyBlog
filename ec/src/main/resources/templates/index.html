@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品一覧</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <header>
+        <!--スマートフォン-->
+        <nav class="menu">
+            <div class="logo">
+                <a href="#"><img src="./images/logo.png" alt=""></a>
+            </div>
+            <div class="menu-contents">
+                <div class="menu-inner">
+                    <ul>
+                        <li class="menu__item"><a href="">ログイン</a></li>
+                        <li class="menu__item"><a href="">商品一覧</a></li>
+                    </ul>
+                </div>
+                <div class="menu-toggle_btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+        <!--pc-->
+        <nav class="pc">
+            <div class="pc-inner">
+                <div class="pc-logo">
+                    <a href=""><img src="./images/logo.png" alt=""></a>
+                </div>
+                <ul class="pc-list">
+                    <li class="pc-list__item"><a href="">ログイン</a></li>
+                    <li class="pc-list__item"><a href="">商品一覧</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <h2>文房具一覧</h2>
+            <div class="search-contents">
+                <form action="">
+                    <ul class="category">
+                        <li><select>
+                                <option value="">鉛筆</option>
+                                <option value="">消しゴム</option>
+                                <option value="">ハサミ</option>
+                            </select></li>
+                        <li><label for="search">検索:<input type="text"></label></li>
+                    </ul>
+                    <div class="search-button"><button>検索</button></div>
+                  
+                </form>
+            </div>
+
+            <ul class="products">
+                <li><a href="#"><img src="./images/stationary_img/eraser.png" alt="">
+                    <p>消しゴム</p></a>
+                </li>
+                <li><a href="#"><img src="./images/stationary_img/hasami.png" alt="">
+                    <p>ハサミ</p></a>
+                </li>
+                <li><a href="#"><img src="./images/stationary_img/pencil.png" alt="">
+                    <p>鉛筆</p></a>
+                </li>
+                <li><a href="#"><img src="./images/stationary_img/stamp.png" alt="">
+                    <p>印鑑</p></a>
+                </li>
+            </ul>
+        </article>
+    </main>
+    <footer>
+        <div>
+            <small>&copy; 2022 Izawa</small>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="./js/common.js"></script>
+</body>
+
+</html>
