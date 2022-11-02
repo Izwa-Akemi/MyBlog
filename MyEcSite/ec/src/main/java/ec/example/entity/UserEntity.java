@@ -31,10 +31,6 @@ public class UserEntity {
 		this.address = address;
 	}
 
-	public UserEntity(Long userId) {
-		this.userId = userId;
-	}
-
 	@Id
 	@Column(name="user_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -8,7 +8,6 @@
     <title>商品一覧</title>
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
-</script>
 </head>
 
 <body>
@@ -49,26 +48,34 @@
         <article>
             <h2>文房具一覧</h2>
             <div class="search-contents">
-                
+                <form action="">
                     <ul class="category">
-                        <li><select name="categoryId" id="categoryId">
-                                <option value="0">鉛筆</option>
-                                <option value="1">消しゴム</option>
-                                <option value="2">ハサミ</option>
+                        <li><select>
+                                <option value="">鉛筆</option>
+                                <option value="">消しゴム</option>
+                                <option value="">ハサミ</option>
                             </select></li>
-                        <li><label for="search">検索:<input type="text" name="itemName" id="itemName"></label></li>
+                        <li><label for="search">検索:<input type="text"></label></li>
                     </ul>
-                    <div class="search-button"><button class="search">検索</button></div>
-                
+                    <div class="search-button"><button>検索</button></div>
+                  
+                </form>
             </div>
 
-            <ul class="products" id="products">
-               
+            <ul class="products">
+                <li><a href="#"><img src="./images/stationary_img/eraser.png" alt="">
+                    <p>消しゴム</p></a>
+                </li>
+                <li><a href="#"><img src="./images/stationary_img/hasami.png" alt="">
+                    <p>ハサミ</p></a>
+                </li>
+                <li><a href="#"><img src="./images/stationary_img/pencil.png" alt="">
+                    <p>鉛筆</p></a>
+                </li>
+                <li><a href="#"><img src="./images/stationary_img/stamp.png" alt="">
+                    <p>印鑑</p></a>
+                </li>
             </ul>
-          
-           
-           
-      
         </article>
     </main>
     <footer>
@@ -76,9 +83,9 @@
             <small>&copy; 2022 Izawa</small>
         </div>
     </footer>
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script th:src="@{./js/common.js}"></script>
+    <script src="./js/common.js"></script>
 </body>
 
 </html>

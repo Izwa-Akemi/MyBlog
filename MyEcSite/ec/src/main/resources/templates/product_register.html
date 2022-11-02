@@ -8,7 +8,6 @@
     <title>商品一覧</title>
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
-</script>
 </head>
 
 <body>
@@ -46,39 +45,44 @@
         </nav>
     </header>
     <main>
-        <article>
-            <h2>文房具一覧</h2>
-            <div class="search-contents">
-                
-                    <ul class="category">
-                        <li><select name="categoryId" id="categoryId">
-                                <option value="0">鉛筆</option>
-                                <option value="1">消しゴム</option>
-                                <option value="2">ハサミ</option>
-                            </select></li>
-                        <li><label for="search">検索:<input type="text" name="itemName" id="itemName"></label></li>
-                    </ul>
-                    <div class="search-button"><button class="search">検索</button></div>
-                
-            </div>
+        <div class="main-inner">
+            <section class="register-section">
+                <h2>商品登録画面</h2>
+                <form action="staff_insert.php" method="post" enctype="multipart/form-data">
+                    <div class="register-section-details">
+                        <div class="register-section-details_flex">
+                            <div>商品名</div>
+                            <input type="text" name="staff_name" value="">
+                        </div>
+                        <div class="register-section-details_flex">
+                            <div>カテゴリー</div>
+                            <select>
+                                <option value=""></option>
+                                <option value="">筆記用具</option>
+                            </select>
+                        </div>
+                        <div class="register-section-details_flex">
+                            <div>商品の説明</div>
+                            <textarea name="message" placeholder="商品の説明文"></textarea>
+                        </div>
 
-            <ul class="products" id="products">
-               
-            </ul>
-          
-           
-           
-      
-        </article>
+                    </div>
+                    <div class="register-section-details_flex">
+                        <button class="register">登録</button>
+                        <button class="back-btn" onclick="history.back();" type="button">戻る</button>
+                    </div>
+                </form>
+            </section>
+        </div>
     </main>
     <footer>
         <div>
             <small>&copy; 2022 Izawa</small>
         </div>
     </footer>
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script th:src="@{./js/common.js}"></script>
+    <script src="./js/common.js"></script>
 </body>
 
 </html>

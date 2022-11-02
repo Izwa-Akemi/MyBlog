@@ -10,8 +10,5 @@ import ec.example.entity.ItemEntity;
 
 @Repository
 public interface ItemDao extends JpaRepository<ItemEntity, Long> {
-	ItemEntity findByItemId(Long itemId);
-	List<ItemEntity> findByCategoryId(int categoryId);
-	List<ItemEntity> findByItemNameLike(String itemName);
-	List<ItemEntity> findByCategoryIdAndItemNameLike(int categoryId,String itemName);
+	
 }

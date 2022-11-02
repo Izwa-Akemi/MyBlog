@@ -1,0 +1,60 @@
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{./css/reset.css}">
+	<link rel="stylesheet" th:href="@{./css/blog_style.css}">
+	<link rel="stylesheet" th:href="@{./css/pc_style.css}">
+</head>
+
+<body>
+    <header class="media__header">
+        <div class="header__logo">
+          <a href="https://snowden-light.com">
+				<img th:src="@{\images\logo.png}">
+			</a>
+        </div>
+        <nav class="header__nav pc">
+            <ul class="flex__item">
+                <li class="nav__list">
+                    <a href="https://snowden-light.com/category/html/" class="nav__link">HTML</a>
+                </li>
+                <li class="nav__list">
+                    <a href="https://snowden-light.com/category/css/" class="nav__link">CSS</a>
+                </li>
+                <li class="nav__list">
+                    <a href="https://snowden-light.com/category/javascript/" class="nav__link">JavaScript</a>
+                </li>
+                <li class="nav__list">
+                    <a href="https://snowden-light.com/category/php/" class="nav__link">PHP</a>
+                </li>
+                <li class="nav__list">
+                    <a href="https://snowden-light.com/category/mysql/" class="nav__link">MySQL</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="single__container">
+            <div class="article__header">
+                <span class="single__cat" th:value="${blogs.categoryName}"></span>
+                <h1 th:text="${blogs.blogTitle}"></h1>
+            </div>
+            <div class="article__eyecatch">
+               	<img th:src="@{..\..\blog-image\{items} (items=${blogs.blogImage})}">
+            </div>
+
+            <div class="article__content">
+                <p th:text="${blogs.message}"></p>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <p>Copyright © 2022 izawa-Sample All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>
