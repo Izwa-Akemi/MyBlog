@@ -6,8 +6,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<link rel="stylesheet" th:href="@{./css/reset.css}">
-	<link rel="stylesheet" th:href="@{./css/style.css}">
+	<link rel="stylesheet" th:href="@{/css/reset.css}">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@300;400;500&display=swap" rel="stylesheet">
@@ -90,7 +90,7 @@
 						<input type="text" name="userId" th:value="${userId}">
 						<input type="text" name="blogId" th:value="${blogs.blogId}">
 						<div class="register-section-details_flex">
-							<button class="edit" id="register">登録</button>
+							<button class="edit" id="register">更新</button>
 							<button class="back-btn" onclick="history.back();" type="button">戻る</button>
 						</div>
 					</div>

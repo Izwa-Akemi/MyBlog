@@ -67,12 +67,13 @@
 				<div class="all-view__flex">
 
 					<div class="all-view-article" th:each="blog:${blogList}">
-						<a th:href="@{/blogDetail/{blogId}(blogId=${blog.blogId})}" class="all-view-colum">
+						<!--<a th:href="@{/blogDetail/{blogId}(blogId=${blog.blogId})}" class="all-view-colum">-->
+						<a th:href="'/blogDetail/'+${blog.blogId}" class="all-view-colum">
 							<div class="all-view__category">
 								<p th:text=" ${blog.categoryName}">
 								</p>
 							</div>
-							<img th:src="@{../../blog-image/{items}(items=${blog.blogImage})}">
+							<img th:src="@{./blog-image/{items}(items=${blog.blogImage})}">
 						</a>
 						<div class="colum__box" th:text=" ${blog.blogTitle}">
 

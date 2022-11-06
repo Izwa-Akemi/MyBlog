@@ -18,8 +18,18 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Entity
-@Table(name="item")
+@Table(name="category")
 public class CategoryEntity {
+	public CategoryEntity(String categoryName, int active) {
+		this.categoryName = categoryName;
+		this.active = active;
+	}
+
+	public CategoryEntity(Long categoryId, int active) {
+		this.categoryId = categoryId;
+		this.active = active;
+	}
+
 	@Id
 	@Column(name="category_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)

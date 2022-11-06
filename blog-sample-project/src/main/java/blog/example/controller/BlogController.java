@@ -40,28 +40,53 @@ public class BlogController {
 	CategoryService categoryServie;
 
 
+	/*
+	 * 管理者側の処理
+	 */
 
+	//管理者側のブログ一覧を表示
 	@GetMapping("/blogAll")
 	public String getLoginPage(Model model) {
+		//		現在のリクエストに紐づく Authentication を取得するには SecurityContextHolder.getContext().getAuthentication() とする。
+		//		SecurityContextHolder.getContext() は、現在のリクエストに紐づく SecurityContext を返している。
+		//		Authentication.getAuthorities() で、現在のログインユーザーに付与されている権限（GrantedAuthority のコレクション）を取得できる。
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		//ログインした人のメールアドレスを取得
 		String userEmail = auth.getName();
+		//ユーザーのテーブルの中から、ユーザーのEmailで検索をかけて該当するユーザーのID情報を引っ張り出す。
 		UserEntity user = userService.selectById(userEmail);
+		//ユーザーのテーブルの中からログインしているユーザーの名前の取得
 		String userName = user.getUserName();
+
+		//ユーザーのテーブルの中からログインしているユーザーのIDを取得
 		Long userId = user.getUserId();
+
+		//ブログテーブルの中からユーザーIDを使って、そのユーザーが書いたブログ記事のみを取得する
 		List<BlogEntity>blogList = blogService.selectByUserId(userId);
+		//html側にListに格納した情報を渡す
 		model.addAttribute("blogList",blogList);	 
 		return "blog_all_view.html";
 	}
 
+	//ブログ記事の登録
 	@GetMapping("/blogcreate")
 	public String getBlogCreatePage(Model model) {
+		//		現在のリクエストに紐づく Authentication を取得するには SecurityContextHolder.getContext().getAuthentication() とする。
+		//		SecurityContextHolder.getContext() は、現在のリクエストに紐づく SecurityContext を返している。
+		//		Authentication.getAuthorities() で、現在のログインユーザーに付与されている権限（GrantedAuthority のコレクション）を取得できる。
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		//ログインした人のメールアドレスを取得
 		String userEmail = auth.getName();
+		//ユーザーのテーブルの中から、ユーザーのEmailで検索をかけて該当するユーザーのID情報を引っ張り出す。
 		UserEntity user = userService.selectById(userEmail);
+		//ユーザーのテーブルの中からログインしているユーザーのIDを取得
 		Long userId = user.getUserId();
 		//カテゴリー一覧を取得
 		List<CategoryEntity>categoryList = categoryServie.findByAll();
+		//html側にユーザーidを渡す
 		model.addAttribute("userId",userId);
+		//html側にListに格納した情報を渡す
 		model.addAttribute("categoryList",categoryList);
 
 		return "blog_register_view.html";
@@ -70,11 +95,12 @@ public class BlogController {
 	//登録内容を保存
 	@PostMapping("/blogRegister")
 	public String register(@RequestParam String blogTitle,@RequestParam("blogImage") MultipartFile blogImage,@RequestParam String categoryName,@RequestParam String message,@RequestParam Long userId) {
-
+			//ファイルの名前を取得する
 		String fileName = blogImage.getOriginalFilename();
-
+		
+		//ファイルのアップロード処理
 		try {
-			File blogFile = new File("./blog-image/"+fileName);
+			File blogFile = new File("./src/main/resources/static/blog-image/"+fileName);
 			byte[] bytes = blogImage.getBytes();
 			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(blogFile));
 			out.write(bytes);
@@ -82,12 +108,14 @@ public class BlogController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-
+		//ファイルのアップロード処理後に、サービスクラスのメソッドに値を渡して保存する
 		blogService.insert(blogTitle, fileName, categoryName, message, userId);
 
 		return "redirect:/blogAll";
 	}
 
+	//ブログ記事の詳細を表示させる
+	//リンクタグで記載したblogIdを取得する
 	@GetMapping("/blogDetail/{blogId}")
 	public String getBlogDetailPage(@PathVariable Long blogId, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -110,7 +138,7 @@ public class BlogController {
 		String fileName = blogImage.getOriginalFilename();
 
 		try {
-			File blogFile = new File("./blog-image/"+fileName);
+			File blogFile = new File("./src/main/resources/static/blog-image/"+fileName);
 			byte[] bytes = blogImage.getBytes();
 			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(blogFile));
 			out.write(bytes);
@@ -123,7 +151,9 @@ public class BlogController {
 
 		return "redirect:/blogAll";
 	}
-
+/*
+ * ユーザー側の処理
+ */
 	@GetMapping("/blog")
 	public String getBlogUserPage(Model model) {
 		List<BlogEntity>blogList = blogService.selectByAll();
@@ -132,11 +162,23 @@ public class BlogController {
 		model.addAttribute("categoryList",categoryList);
 		return "index.html";
 	}
-	
+
 	@GetMapping("/blogUserDetail/{blogId}")
 	public String getBlogUserDetailPage(@PathVariable Long blogId, Model model) {
 		BlogEntity blogs = blogService.selectByBlogId(blogId);
+		List<CategoryEntity>categoryList = categoryServie.findByAll();
+		model.addAttribute("categoryList",categoryList);
 		model.addAttribute("blogs",blogs);	
 		return "blog.html";
+	}
+
+	@GetMapping("/blogCategoryList/{categoryName}")
+	public String getBlogUserDetailPage(@PathVariable String categoryName, Model model) {
+		List<BlogEntity> blogList = blogService.selectByCategoryName(categoryName);
+		List<CategoryEntity>categoryList = categoryServie.findByAll();
+		model.addAttribute("categoryList",categoryList);
+		model.addAttribute("categoryName",categoryName);
+		model.addAttribute("blogList",blogList);	
+		return "categoryList.html";
 	}
 }

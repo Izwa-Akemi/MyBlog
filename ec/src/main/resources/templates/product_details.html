@@ -6,8 +6,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>商品一覧</title>
-	<link rel="stylesheet" href="./css/reset.css">
-	<link rel="stylesheet" href="./css/style.css">
+	<link rel="stylesheet" th:href="@{/css/reset.css}">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
@@ -49,13 +49,13 @@
 
 			<h2 th:text="${item.itemName}"></h2>
 			<div class="product-details">
-				<img src="./images/stationary_img/hasami.png" alt="">
+				<img th:src="@{/itemImage/{item}(item=${item.image})}">
 			</div>
 			<div class="product-details-message">
 				<p th:text="${item.detail}">
 				</p>
 			</div>
-			<div class="product-details-purchasBtn"><a href="/cartadd/${item.itemId}">カートに入れる</a></div>
+			<div class="product-details-purchasBtn"><a th:href="'/cartadd/'+${item.itemId}">カートに入れる</a></div>
 
 		</article>
 	</main>

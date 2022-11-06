@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>商品一覧</title>
-     <link rel="stylesheet" th:href="@{/css/reset.css}">
-	<link rel="stylesheet" th:href="@{/css/style.css}">
+  <link rel="stylesheet" th:href="@{./css/reset.css}">
+	<link rel="stylesheet" th:href="@{./css/style.css}">
 </head>
 
 <body>
@@ -45,32 +45,38 @@
         </nav>
     </header>
     <main>
-        <div class="products-list">
-            <h2>カート内一覧</h2>
-            <table class="products-table">
-                <tr>
-                    <th>商品名</th>
-                    <th>商品画像</th>
-                    <th>注文個数</th>
-                </tr>
-                <tr　th:each="items:${newList}">
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <form action="#" method=""><input type="text" th:value="${items.num}"><button>購入</button></form>
-                    </td>
-                </tr>
-            </table>
-        </div>
+        <article>
+            <h2>文房具一覧</h2>
+            <div class="search-contents-list"> 
+                      <ul class="category">
+                        <li><select name="categoryId" id="categoryId">
+                                 <option th:each="category:${categoryList}" th:value="${category.categoryId}" th:text="${category.categoryName}"></option>
+                            </select></li>
+                        <li><label for="search">検索:<input type="text" name="itemName" id="itemName"></label></li>
+                    </ul>
+                    <div class="search-button"><button id="search">検索</button></div>
+            </div>
+            <section class="register-item">
+                <div class="all-view-register__button">
+                    <a th:href="@{/productregister}" class="btn btn--orange btn--radius">商品登録</a>
+                </div>
+            </section>
+           <ul class="products" id="products">
+                <li th:each="items:${itemList}"><a th:href="'/admin/detail/'+${items.itemId}"><img th:src="@{./itemImage/{item}(item=${items.image})}">
+                    <p th:text="${items.itemName}"></p><br> <p th:text="${items.price}"></p></a>
+                </li>
+            </ul>
+        </article>
+
     </main>
     <footer>
         <div>
             <small>&copy; 2022 Izawa</small>
         </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="./js/common.js"></script>
+    <script th:src="@{./js/common.js}"></script>
 </body>
 
 </html>

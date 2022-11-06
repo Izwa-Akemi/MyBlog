@@ -5,9 +5,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
-	<link rel="stylesheet" th:href="@{./css/reset.css}">
-	<link rel="stylesheet" th:href="@{./css/blog_style.css}">
-	<link rel="stylesheet" th:href="@{./css/pc_style.css}">
+	<link rel="stylesheet" th:href="@{/css/reset.css}">
+	<link rel="stylesheet" th:href="@{/css/blog_style.css}">
+	<link rel="stylesheet" th:href="@{/css/pc_style.css}">
 </head>
 
 <body>
@@ -20,7 +20,7 @@
 		<nav class="header__nav pc">
 			<ul class="flex__item">
 				<li class="nav__list" th:each="category : ${categoryList}">
-					<a th:href="@{/blogCategoryList/{categoryName}(categoryName=${category.categoryName})}" class="nav__link"　th:text="${category.categoryName}"></a>
+						<a th:href="@{/blogCategoryList/{categoryName}(categoryName=${category.categoryName})}" class="nav__link"　th:text="${category.categoryName}"></a>
 				</li>
 			</ul>
 		</nav>
@@ -28,7 +28,7 @@
 	<main>
 
 		<div class="media-firstview">
-			<h1 class="media__fv-ttl">Commit to the growth<br>for everyone</h1>
+			<h1 class="media__fv-ttl" th:text="${categoryName}"></h1>
 		</div>
 
 		<div class="container">
@@ -39,7 +39,7 @@
 					<div class="flex__item">
 						<a class="article__card" th:href="@{/blogUserDetail/{blogId}(blogId=${blog.blogId})}" th:each="blog:${blogList}">
 							<div class="article__card-eyecatch">
-							   <img th:src="@{./blog-image/{items}(items=${blog.blogImage})}">
+							   <img th:src="@{/blog-image/{items}(items=${blog.blogImage})}">
 							</div>
 							<span class="article__card-cat" th:text=" ${blog.categoryName}">
 								</span>

@@ -22,6 +22,11 @@ public class CartHistoryEntity {
 		this.num = num;
 		this.cartId = cartId;
 	}
+	public CartHistoryEntity(Long cartHistoryId, int num) {
+		this.cartHistoryId = cartHistoryId;
+		this.num = num;
+		
+	}
 
 	@Id
 	@Column(name="carthistory_id")

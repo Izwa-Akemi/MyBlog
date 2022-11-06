@@ -6,8 +6,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>商品一覧</title>
-	<link rel="stylesheet" th:href="@{./css/reset.css}">
-	<link rel="stylesheet" th:href="@{./css/style.css}">
+	<link rel="stylesheet" th:href="@{/css/reset.css}">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
@@ -47,37 +47,43 @@
 	<main>
 		<div class="main-inner">
 			<section class="register-section">
-				<h2>商品登録画面</h2>
-				<form action="/itemcreate" method="post" enctype="multipart/form-data">
+				<h2>商品更新画面</h2>
+				<form action="/itemupdate" method="post" enctype="multipart/form-data">
 					<div class="register-section-details">
 						<div class="register-section-details_flex">
 							<div>商品名</div>
-							<input type="text" name="itemName" value="">
+							<input type="text" name="itemName" th:value="${item.itemName}">
 						</div>
 						<div class="register-section-details_flex">
 							<div>カテゴリー</div>
 							<select name="categoryId">
 								<option th:each="category:${categoryList}" th:value="${category.categoryId}"
-									th:text="${category.categoryName}"></option>
+									th:text="${category.categoryName}" th:selected="${category.categoryId == item.categoryId}"></option>
 							</select>
 						</div>
 						<div class="register-section-details_flex">
+							<div>登録済み画像</div>
+							<img th:src="@{/itemImage/{item}(item=${item.image})}">
+						</div>
+						<div class="register-section-details_flex">
 							<div>商品画像</div>
-							<input type="file" name="image" value="">
+							<input type="file" name="image">
 						</div>
 						<div class="register-section-details_flex">
 							<div>価格</div>
-							<input type="text" name="price" value="">
+							<input type="text" name="price" th:value="${item.price}">
 						</div>
 						<input type="hidden" name="stock" value="0">
 						<div class="register-section-details_flex">
 							<div>商品の説明</div>
-							<textarea name="detail" placeholder="商品の説明文"></textarea>
+							<textarea name="detail" placeholder="商品の説明文" th:text="${item.detail}"></textarea>
 						</div>
-						<input type="hidden" name="active" value="1">
+						<input type="hidden" name="active" th:value="${item.active}">
+						<input type="hidden" name="stock" th:value="${item.stock}">
+						<input type="hidden" name="itemId" th:value="${item.itemId}">
 					</div>
 					<div class="register-section-details_flex">
-						<button class="register">登録</button>
+						<button class="register">更新</button>
 						<button class="back-btn" onclick="history.back();" type="button">戻る</button>
 					</div>
 				</form>

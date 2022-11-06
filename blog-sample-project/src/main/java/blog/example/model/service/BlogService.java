@@ -30,11 +30,15 @@ public class BlogService {
 	public void update(Long blogId,String blogTitle,String fileName,String categoryName,String message,Long userId) {
 		blogDao.save(new BlogEntity(blogId,blogTitle,fileName,categoryName,message,userId));
 	}
-	
-	
+
 	//ユーザーブログ一覧
-		public List<BlogEntity> selectByAll(){
-			return blogDao.findAll();
-		}
+	public List<BlogEntity> selectByAll(){
+		return blogDao.findAll();
+	}
+
+	//カテゴリー一事の内容
+	public List<BlogEntity> selectByCategoryName(String categoryName){
+		return blogDao.findByCategoryName(categoryName);
+	}
 
 }

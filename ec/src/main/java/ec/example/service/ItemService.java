@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import ec.example.dao.ItemDao;
 import ec.example.entity.ItemEntity;
 
+
 @Service
 public class ItemService {
 	@Autowired
@@ -45,5 +46,18 @@ public class ItemService {
 	public ItemEntity selectByItemId(Long itemId){
 		return itemDao.findByItemId(itemId);
 	}
-
+	
+	public List<ItemEntity> findAllItem(){
+		return itemDao.findAll();
+	}
+	
+	//商品を登録
+	public void insert(String itemName,Integer categoryId,String image,Integer price,Integer stock,String detail,Integer active,Long adminId) {
+		itemDao.save(new ItemEntity(itemName,categoryId,image,price,stock,detail,active,adminId));
+	}
+	
+	//商品を編集
+	public void update(Long itemId,String itemName,Integer categoryId,String image,Integer price,Integer stock,String detail,Integer active,Long adminId) {
+		itemDao.save(new ItemEntity(itemId,itemName,categoryId,image,price,stock,detail,active,adminId));
+	}
 }
