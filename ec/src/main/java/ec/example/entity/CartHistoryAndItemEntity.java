@@ -1,5 +1,6 @@
 package ec.example.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -13,12 +14,20 @@ import lombok.NonNull;
 @Entity
 public class CartHistoryAndItemEntity {
 	@Id
-	private Long cartHistoryId;
 	private Long cartId;
-	private Long itemId;
+	
+	private int num;
+	
 	private String itemName;
+	
 	private String image;
+	
+	
 	private Integer price;
+	
+	
 	private Integer stock;
+	
+	
 	private String detail;
 }

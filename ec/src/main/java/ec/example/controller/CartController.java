@@ -73,6 +73,7 @@ public class CartController {
 		List<CartHistoryAndItemEntity>newList = cartHistoryService.selectByCartId(cartId);
 		//List<CartHistoryEntity>newList = cartHistoryService.selectByCartId(cartId);
 		model.addAttribute("newList", newList);
+		model.addAttribute("cartId", cartId);
 		
 		return "cart_list.html";
 	}

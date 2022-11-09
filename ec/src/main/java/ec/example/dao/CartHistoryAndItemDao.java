@@ -11,6 +11,6 @@ import ec.example.entity.CartHistoryAndItemEntity;
 
 @Repository
 public interface CartHistoryAndItemDao extends JpaRepository<CartHistoryAndItemEntity,Long>{
-	@Query(value="select h.carthistory_id,h.cart_id,i.item_name,i.image,i.stock,i.price,i.detail from carthistory h INNER JOIN item i ON h.item_id = i.item_id WHERE h.cart_id=?1)",nativeQuery = true)
+	@Query(value="select h.cart_id AS cart_id,h.num AS num,i.item_name AS item_name,i.image AS image,i.stock AS stock,i.price AS price,i.detail AS detail from carthistory h INNER JOIN item i ON h.item_id = i.item_id WHERE h.cart_id=?1",nativeQuery = true)
 	List<CartHistoryAndItemEntity> findByCartId(Long cartId);
 }
