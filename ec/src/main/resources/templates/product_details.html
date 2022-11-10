@@ -55,7 +55,7 @@
 				<p th:text="${item.detail}">
 				</p>
 			</div>
-			<div class="product-details-purchasBtn"><a th:href="'/cartadd/'+${item.itemId}">カートに入れる</a></div>
+			<div class="product-details-purchasBtn" th:if ="${item.stock gt 0}"><a th:href="'/cartadd/'+${item.itemId}">カートに入れる</a></div>
 
 		</article>
 	</main>

@@ -21,6 +21,9 @@ public class CartHistoryService {
 	public void insert(Long itemId,int num,Long cartId) {
 		cartHistoryDao.save(new CartHistoryEntity(itemId,num,cartId));
 	}
+	public void insert(CartHistoryEntity cartHistoryEntity) {
+		cartHistoryDao.save(cartHistoryEntity);
+	}
 	
 	public List<CartHistoryEntity> selectByCartIdAndItemId(Long cartId,Long itemId){
 		return cartHistoryDao.findByCartIdAndItemId(cartId, itemId);
@@ -33,8 +36,15 @@ public class CartHistoryService {
 	
 	//カートの内容を取得
 	public List<CartHistoryAndItemEntity> selectByCartId(Long cartId){
+		System.out.println(cartHistoryAndItemDao.findByCartId(cartId));
 		return cartHistoryAndItemDao.findByCartId(cartId);
 	}
+	
+	//カートの内容を取得
+		public List<CartHistoryEntity> selectHistoryByCartId(Long cartId){
+			System.out.println(cartHistoryAndItemDao.findByCartId(cartId));
+			return cartHistoryDao.findByCartId(cartId);
+		}
 //	public List<CartHistoryEntity> selectByCartId(Long cartId){
 //		return cartHistoryDao.findByCartId(cartId);
 //	}

@@ -29,7 +29,7 @@ public class ItemService {
 			return itemDao.findByCategoryIdAndItemNameLike(categoryId,"%"+itemName+"%");
 		}
 	}
-
+	
 	//カテゴリーを探す
 	public List<ItemEntity> selectByCategoryId(int categoryId){
 		return itemDao.findByCategoryId(categoryId);
@@ -55,7 +55,10 @@ public class ItemService {
 	public void insert(String itemName,Integer categoryId,String image,Integer price,Integer stock,String detail,Integer active,Long adminId) {
 		itemDao.save(new ItemEntity(itemName,categoryId,image,price,stock,detail,active,adminId));
 	}
-	
+	//商品を登録
+		public void insert(ItemEntity itemEntity) {
+			itemDao.save(itemEntity);
+		}
 	//商品を編集
 	public void update(Long itemId,String itemName,Integer categoryId,String image,Integer price,Integer stock,String detail,Integer active,Long adminId) {
 		itemDao.save(new ItemEntity(itemId,itemName,categoryId,image,price,stock,detail,active,adminId));
