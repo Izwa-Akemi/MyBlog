@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ec.example.dao.CartDao;
 import ec.example.entity.CartEntity;
+import ec.example.entity.CartHistoryEntity;
 
 @Service
 public class CartService {
@@ -20,5 +21,9 @@ public class CartService {
 	
 	public void insert(Long userId,String cartDate) {
 		cartDao.save(new CartEntity(userId,cartDate));
+	}
+	//削除
+	public List<CartEntity>deleteCart(Long cartId){
+		return cartDao.deleteByCartId(cartId);
 	}
 }

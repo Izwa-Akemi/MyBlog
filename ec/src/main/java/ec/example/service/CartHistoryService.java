@@ -45,6 +45,10 @@ public class CartHistoryService {
 			System.out.println(cartHistoryAndItemDao.findByCartId(cartId));
 			return cartHistoryDao.findByCartId(cartId);
 		}
+	//削除
+		public List<CartHistoryEntity>deleteCartHistory(Long cartId){
+			return cartHistoryDao.deleteByCartId(cartId);
+		}
 //	public List<CartHistoryEntity> selectByCartId(Long cartId){
 //		return cartHistoryDao.findByCartId(cartId);
 //	}
