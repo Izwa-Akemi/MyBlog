@@ -15,6 +15,7 @@ public class PrefService {
 	
 	//一覧取得
     public List<PrefEntity> findAll() {
+    	//daoクラスのfindAllメソッドを使用して一覧の内容を取得する。
         return prefDao.findAll();
     }
 }

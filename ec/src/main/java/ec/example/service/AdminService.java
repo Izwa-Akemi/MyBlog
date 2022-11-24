@@ -19,10 +19,13 @@ public class AdminService {
 	
 	//ログイン処理
 	public AdminEntity findByAdminNameAndPassword(String adminName, String password) {
+		//コントローラークラスからadminNameとpasswordと受け取って結果を受け取る
 		List<AdminEntity> adminList = adminDao.findByAdminNameAndPassword(adminName, password);
+		//もしadminListが空だった場合には、nullを返す処理
 	    if(adminList.isEmpty()){
 	        return null;
 	    }else{
+	    	//もしadminListが空でなかった場合には、Ｌｉｓｔの0番目の要素を取得する
 	        return adminList.get(0);
 	    }
 
@@ -30,6 +33,7 @@ public class AdminService {
 	
 		//内容を保存
 		public void insert(String adminName,String adminEmail,String password) {
+			//コントローラークラスで受け取った、内容をdaoのsaveメソッドに渡して保存をする。
 			adminDao.save(new AdminEntity(adminName,adminEmail,password));
 		}
 }

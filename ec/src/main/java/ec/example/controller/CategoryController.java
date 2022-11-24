@@ -22,6 +22,7 @@ public class CategoryController {
 	//登録内容を一覧表示
 	@GetMapping("/categoryAll")
 	public String getCategoryAllPage(Model model) {
+		
 		List<CategoryEntity>categoryList = categoryService.selecFindAll();
 		model.addAttribute("categoryList",categoryList);
 		return "category_all.html";

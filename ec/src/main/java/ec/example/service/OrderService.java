@@ -14,10 +14,12 @@ public class OrderService {
 	private OrderDao orderDao;
 	
 	public void insert(OrderEntity orderEntity) {
+		//コントローラークラスで受け取った、内容をdaoのsaveメソッドに渡して保存をする。
 		orderDao.save(orderEntity);
 	}
 	
 	public List<OrderEntity> selectMaxOrderId(){
+		//daoクラスのfindByItemIdメソッドに値を渡して内容を取得する。
 		return orderDao.findByOrderId();
 	}
 
