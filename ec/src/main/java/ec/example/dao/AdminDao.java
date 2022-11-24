@@ -10,6 +10,7 @@ import ec.example.entity.AdminEntity;
 
 @Repository
 public interface AdminDao extends JpaRepository<AdminEntity, Long> {
+	
 	AdminEntity save(AdminEntity adminEntity);
 	List<AdminEntity> findByAdminNameAndPassword(String adminName, String password);
 }
