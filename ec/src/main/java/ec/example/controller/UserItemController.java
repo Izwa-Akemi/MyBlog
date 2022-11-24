@@ -25,26 +25,44 @@ import ec.example.service.UserItemService;
 
 @Controller
 public class UserItemController {
+	//ユーザ情報はセッションで保持しているため、
+	//セッション情報を定義させる。
 	@Autowired
 	HttpSession session;
+
+	/**
+	 * 	itemテーブルを操作するためのServiceクラス
+	 */
 	@Autowired
 	private UserItemService itemService;
+
+	/**
+	 * categoryテーブルを操作するためのServiceクラス
+	 */
 	@Autowired
 	private CategoryService categoryService;
+
+	/**
+	 * ユーザ用のitemテーブルを操作するためのServicceクラス
+	 */
 	@Autowired
 	private UserItemService userItemService;
 
 	/*--------------------------------------------------------------------------------------------
 	 * ユーザー側の操作
-	 *
 	 */
 	//ユーザー側の商品一覧
 	@GetMapping("/itemList")
 	public String getItemListPage(Model model) {
+		//itemテーブルから、すべての商品情報を取得する。
 		List<ItemAndBookMarkEntity>itemList = userItemService.findAllItem();
+		//categoryテーブルから、すべてのカテゴリ情報を取得する。
 		List<CategoryEntity>categoryList = categoryService.selecFindAll();
+		//セッションから、ユーザ情報を取得する。
 		UserEntity user = (UserEntity) session.getAttribute("user");
+		//取得したユーザ情報から、ユーザIDを取得する。
 		String loginUserName = user.getUserName();
+		//index.htmlから参照可能なように、ユーザID、カテゴリ情報、商品情報をmodelにセットする。
 		model.addAttribute("loginUserName",loginUserName);
 		model.addAttribute("categoryList",categoryList);
 		model.addAttribute("itemList",itemList);
@@ -55,8 +73,10 @@ public class UserItemController {
 	@ResponseBody
 	public String getSearchItemPage(@RequestParam int categoryId,@RequestParam String itemName) {
 		//List<ItemEntity> itemList =  itemService.returnSerach(categoryId, itemName);
+		//カテゴリ情報や、商品名でitemテーブルから商品検索をする。
        List<ItemAndBookMarkEntity>itemList = itemService.returnSerach(categoryId, itemName);
-       System.out.println(itemList);
+      // System.out.println(itemList);
+		//商品情報をJSON文字列に変換したものをHTTP応答として返す。
 		return getJson(itemList);
 	}
 	/**
@@ -66,8 +86,10 @@ public class UserItemController {
 	 */
 	private String getJson(List<ItemAndBookMarkEntity> itemList){
 		String retVal = null;
+		//JavaオブジェクトをJSON文字列に変換するためのクラスをインスタンス化する。
 		ObjectMapper objectMapper = new ObjectMapper();
 		try{
+			//商品情報リストをJSON文字列に変換する。
 			retVal = objectMapper.writeValueAsString(itemList);
 		} catch (JsonProcessingException e) {
 			System.err.println(e);
@@ -77,9 +99,13 @@ public class UserItemController {
 
 	@GetMapping("/detail/{itemId}")
 	public String getDetailPage(@PathVariable Long itemId, Model model) {
+		//指定の商品IDにより、商品とお気に入りIDを取得する。
 		ItemAndBookMarkEntity item = itemService.selectByItemId(itemId);
+		//セッションから、ユーザ情報を取得する。
 		UserEntity user = (UserEntity) session.getAttribute("user");
+		//ユーザ情報から、ユーザ名を取得する。
 		String loginUserName = user.getUserName();
+		//product_details.htmlから、ユーザ名と商品情報を参照できるようにmodelへセットする。
 		model.addAttribute("loginUserName",loginUserName);
 		model.addAttribute("item", item);
 		return "product_details.html";
