@@ -76,7 +76,9 @@ public class CartController {
 		List<CartHistoryAndItemEntity>newList = cartHistoryService.selectByCartId(cartId);
 		//List<CartHistoryEntity>newList = cartHistoryService.selectByCartId(cartId);
 	
-		
+		UserEntity user = (UserEntity) session.getAttribute("user");
+		String loginUserName = user.getUserName();
+		model.addAttribute("loginUserName",loginUserName);
 		model.addAttribute("newList", newList);
 		model.addAttribute("cartId", cartId);
 		
@@ -125,7 +127,9 @@ public class CartController {
 		List<CartHistoryAndItemEntity>newList = cartHistoryService.selectByCartId(cartId);
 		//List<CartHistoryEntity>newList = cartHistoryService.selectByCartId(cartId);
 	
-		
+		UserEntity user = (UserEntity) session.getAttribute("user");
+		String loginUserName = user.getUserName();
+		model.addAttribute("loginUserName",loginUserName);
 		model.addAttribute("newList", newList);
 		model.addAttribute("cartId", cartId);
 		

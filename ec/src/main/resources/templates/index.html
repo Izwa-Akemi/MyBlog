@@ -2,84 +2,92 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>商品一覧</title>
-   <link rel="stylesheet" th:href="@{./css/reset.css}">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>商品一覧</title>
+	<link rel="stylesheet" th:href="@{./css/reset.css}">
 	<link rel="stylesheet" th:href="@{./css/style.css}">
-</script>
+	</script>
 </head>
 
 <body>
-    <header>
-        <!--スマートフォン-->
-        <nav class="menu">
-            <div class="logo">
-                <a href="#"><img src="./images/logo.png" alt=""></a>
-            </div>
-            <div class="menu-contents">
-                <div class="menu-inner">
-                    <ul>
-                        <li class="menu__item"><a href="">ログイン</a></li>
-                        <li class="menu__item"><a href="">商品一覧</a></li>
-                    </ul>
-                </div>
-                <div class="menu-toggle_btn">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </nav>
-        <!--pc-->
-        <nav class="pc">
-            <div class="pc-inner">
-                <div class="pc-logo">
-                    <a href=""><img src="./images/logo.png" alt=""></a>
-                </div>
-                <ul class="pc-list">
-                    <li class="pc-list__item"><a href="">ログイン</a></li>
-                     <li class="pc-list__item"><a th:href="@{/logout}">ログアウト</a></li>
-                    <li class="pc-list__item"><a href="">商品一覧</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <main>
-        <article>
-            <h2>文房具一覧</h2>
-            <div class="search-contents">
-                
-                    <ul class="category">
-                        <li><select name="categoryId" id="categoryId">
-                                <option th:each="category:${categoryList}" th:value="${category.categoryId}" th:text="${category.categoryName}"></option>
-                            </select></li>
-                        <li><label for="search">検索:<input type="text" name="itemName" id="itemName"></label></li>
-                    </ul>
-                    <div class="search-button"><button class="search">検索</button></div>
-                
-            </div>
+	<header>
+		<!--スマートフォン-->
+		<nav class="menu">
+			<div class="logo">
+				<a href="#"><img src="./images/logo.png" alt=""></a>
+			</div>
+			<div class="menu-contents">
+				<div class="menu-inner">
+					<ul>
+						<li class="menu__item"><a href="">ログイン</a></li>
+						<li class="menu__item"><a href="">商品一覧</a></li>
+					</ul>
+				</div>
+				<div class="menu-toggle_btn">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+		</nav>
+		<!--pc-->
+		<nav class="pc">
+			<div class="pc-inner">
+				<div class="pc-logo">
+					<a href=""><img src="./images/logo.png" alt=""></a>
+				</div>
+				<ul class="pc-list">
+				    <li class="pc-list__item" th:text="'ようこそ'+${loginUserName}+'さん'"></li>
+					<li class="pc-list__item"><a th:href="@{/itemList}">ホーム</a></li>
+					<li class="pc-list__item"><a th:href="@{/logout}">ログアウト</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<main>
+		<article>
+			<h2>文房具一覧</h2>
+			<div class="search-contents">
 
-            <ul class="products" id="products">
-                <li th:each="items:${itemList}"><a th:href="'/detail/'+${items.itemId}"><img th:src="@{./itemImage/{item}(item=${items.image})}">
-                    <p th:text="${items.itemName}"></p><br> <p th:text="${items.price}"></p></a>
-                </li>
-            </ul>
-          
-           
-           
-      
-        </article>
-    </main>
-    <footer>
-        <div>
-            <small>&copy; 2022 Izawa</small>
-        </div>
-    </footer>
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script th:src="@{./js/common.js}"></script>
+				<ul class="category">
+					<li><select name="categoryId" id="categoryId">
+							<option th:each="category:${categoryList}" th:value="${category.categoryId}"
+								th:text="${category.categoryName}"></option>
+						</select></li>
+					<li><label for="search">検索:<input type="text" name="itemName" id="itemName"></label></li>
+				</ul>
+				<div class="search-button"><button class="search">検索</button></div>
+
+			</div>
+
+			<ul class="products" id="products">
+				<li th:each="items:${itemList}">
+					<a th:href="'/detail/'+${items.itemId}">
+						<img th:src="@{./itemImage/{item}(item=${items.image})}">
+						<p th:text="${items.itemName}"></p><br>
+						<p th:text="${items.price}"></p>
+					</a>
+					<input type="hidden" th:value="${items.itemId}" name="itemId" class="itemfavorite">
+					<button class="add-favorite"　th:if="${items.bookmarkId != null}"><img th:src="@{/favorite/heart.jpeg}"></button>
+					<button class="add-favorite" th:if="${items.bookmarkId == null}"><img th:src="@{/favorite/noheart.png}"></button>
+				</li>
+			</ul>
+
+
+
+
+		</article>
+	</main>
+	<footer>
+		<div>
+			<small>&copy; 2022 Izawa</small>
+		</div>
+	</footer>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script th:src="@{./js/common.js}"></script>
 </body>
 
 </html>

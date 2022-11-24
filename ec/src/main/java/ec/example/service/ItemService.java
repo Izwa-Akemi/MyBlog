@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import ec.example.dao.ItemAndBookMarkDao;
 import ec.example.dao.ItemDao;
 import ec.example.entity.ItemEntity;
 
@@ -47,6 +47,7 @@ public class ItemService {
 		return itemDao.findByItemId(itemId);
 	}
 	
+	//商品一覧を取得
 	public List<ItemEntity> findAllItem(){
 		return itemDao.findAll();
 	}
@@ -59,8 +60,11 @@ public class ItemService {
 		public void insert(ItemEntity itemEntity) {
 			itemDao.save(itemEntity);
 		}
+		
 	//商品を編集
 	public void update(Long itemId,String itemName,Integer categoryId,String image,Integer price,Integer stock,String detail,Integer active,Long adminId) {
 		itemDao.save(new ItemEntity(itemId,itemName,categoryId,image,price,stock,detail,active,adminId));
 	}
+
+	
 }

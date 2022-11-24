@@ -638,3 +638,25 @@ footer div {
     }
 
 }
+.add-favorite{
+	width:30px;
+	height:30px;
+	border:none;
+	background-color: white;
+}
+.no-add-favorite{
+width:30px;
+	height:30px;
+	border:none;
+	background-color: white;
+}
+
+.buy{
+	display:block;
+	text-align: center;
+	margin:20px auto;
+	background-color: orange;
+	width:120px;
+	color:white;
+	padding:1rem 1.5rem;
+}

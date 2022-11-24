@@ -82,18 +82,13 @@ public class ItemController {
 		return "redirect:/itemmanage";
 	}
 
-
 	@GetMapping("/searchadminitem")
 	@ResponseBody
 	public String getSearchAdminItemPage(@RequestParam int categoryId,@RequestParam String itemName) {
 		List<ItemEntity> itemList =  itemService.returnSerach(categoryId, itemName);
 		return getJsonAdmin(itemList);
 	}
-	/**
-	 * 引数のUserDataオブジェクトをJSON文字列に変換する
-	 * @param userDataList UserDataオブジェクトのリスト
-	 * @return 変換後JSON文字列
-	 */
+	
 	private String getJsonAdmin(List<ItemEntity> itemList){
 		String retVal = null;
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -115,7 +110,7 @@ public class ItemController {
 
 	}
 
-	//管理者商品登録画面
+	//管理者商品編集画面
 	@PostMapping("/itemupdate")
 	public String ItemRegister(@RequestParam Long itemId, @RequestParam String itemName,
 			@RequestParam Integer categoryId,
@@ -142,47 +137,24 @@ public class ItemController {
 		return "redirect:/itemmanage";
 	}
 
-
-	/*--------------------------------------------------------------------------------------------
-	 * ユーザー側の操作
-	 *
-	 */
-	//ユーザー側の商品一覧
-	@GetMapping("/itemList")
-	public String getItemListPage(Model model) {
-		List<ItemEntity>itemList = itemService.findAllItem();
-		model.addAttribute("itemList",itemList);
-		return "index.html";
+	//管理者在庫リスト画面
+	@GetMapping("/inventorylist")
+	public String getInventoryListPage(Model model) {
+	    List<ItemEntity> itemList = itemService.findAllItem();
+	    model.addAttribute("itemList",itemList);
+		return "product_list.html";
+	}
+	//在庫更新
+	@PostMapping("/inventory/update")
+	public String updateInventoryList(@RequestParam Long itemId,@RequestParam Integer stock) {
+		AdminEntity adminEntity = (AdminEntity) session.getAttribute("admin");
+		Long adminId = adminEntity.getAdminId();
+		ItemEntity itemEntity = itemService.selectByItemId(itemId);
+		itemEntity.setAdminId(adminId);
+		itemEntity.setStock(stock);
+	    itemService.insert(itemEntity);
+		return "redirect:/inventorylist";
 	}
 
-	@GetMapping("/searchitem")
-	@ResponseBody
-	public String getSearchItemPage(@RequestParam int categoryId,@RequestParam String itemName) {
-		List<ItemEntity> itemList =  itemService.returnSerach(categoryId, itemName);
-		return getJson(itemList);
-	}
-	/**
-	 * 引数のUserDataオブジェクトをJSON文字列に変換する
-	 * @param userDataList UserDataオブジェクトのリスト
-	 * @return 変換後JSON文字列
-	 */
-	private String getJson(List<ItemEntity> itemList){
-		String retVal = null;
-		ObjectMapper objectMapper = new ObjectMapper();
-		try{
-			retVal = objectMapper.writeValueAsString(itemList);
-		} catch (JsonProcessingException e) {
-			System.err.println(e);
-		}
-		return retVal;
-	}
-
-	@GetMapping("/detail/{itemId}")
-	public String getDetailPage(@PathVariable Long itemId, Model model) {
-		ItemEntity item = itemService.selectByItemId(itemId);
-		model.addAttribute("item", item);
-		return "product_details.html";
-
-	}
 
 }

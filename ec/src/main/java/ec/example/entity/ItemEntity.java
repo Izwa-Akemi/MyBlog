@@ -34,7 +34,7 @@ public class ItemEntity {
 		this.adminId = adminId;
 	}
 	public ItemEntity(String itemName, Integer categoryId, @NonNull String image, Integer price,
-			Integer stock, @NonNull String detail,Long adminId) {
+		Integer stock, @NonNull String detail,Long adminId) {
 		this.itemName = itemName;
 		this.categoryId = categoryId;
 		this.image = image;
@@ -44,6 +44,10 @@ public class ItemEntity {
 		this.adminId = adminId;
 	}
 	
+
+
+
+
 
 
 	@Id
@@ -80,4 +84,5 @@ public class ItemEntity {
 
 	@Column(name="admin_id")
 	private Long adminId;
+	
 }

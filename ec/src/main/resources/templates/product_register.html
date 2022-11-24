@@ -15,7 +15,7 @@
 		<!--スマートフォン-->
 		<nav class="menu">
 			<div class="logo">
-				<a href="#"><img src="./images/logo.png" alt=""></a>
+				<a href="#"><img src="/images/logo.png" alt=""></a>
 			</div>
 			<div class="menu-contents">
 				<div class="menu-inner">
@@ -35,12 +35,14 @@
 		<nav class="pc">
 			<div class="pc-inner">
 				<div class="pc-logo">
-					<a href=""><img src="./images/logo.png" alt=""></a>
+					<a href=""><img src="/images/logo.png" alt=""></a>
 				</div>
-				<ul class="pc-list">
-					<li class="pc-list__item"><a href="">ログイン</a></li>
-					<li class="pc-list__item"><a href="">商品一覧</a></li>
-				</ul>
+				   <ul class="pc-list">
+                    <li class="pc-list__item"><a href="/admin/logout">ログアウト</a></li>
+                    <li class="pc-list__item"><a href="/itemmanage">商品一覧</a></li>
+                     <li class="pc-list__item"><a href="/inventorylist">在庫一覧</a></li>
+                       <li class="pc-list__item"><a href="/categoryAll">カテゴリー一覧</a></li>
+                </ul>
 			</div>
 		</nav>
 	</header>
@@ -69,7 +71,7 @@
 							<div>価格</div>
 							<input type="text" name="price" value="">
 						</div>
-						<input type="hidden" name="stock" value="5">
+						<input type="hidden" name="stock" value="0">
 						<div class="register-section-details_flex">
 							<div>商品の説明</div>
 							<textarea name="detail" placeholder="商品の説明文"></textarea>

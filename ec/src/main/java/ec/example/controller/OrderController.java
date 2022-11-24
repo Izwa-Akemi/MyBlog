@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -39,7 +40,7 @@ public class OrderController {
 	HttpSession httpSession;
 	
 	@PostMapping("/order")
-	public String OrderRegister(@RequestParam Long cartId) {
+	public String OrderRegister(@RequestParam Long cartId, Model model) {
 		
 		UserEntity userEntity = (UserEntity) httpSession.getAttribute("user");
 		Long userId = userEntity.getUserId();
@@ -74,6 +75,9 @@ public class OrderController {
 			
 		}
 		itemHistoryService.deleteCartId(cartId);
+		UserEntity user = (UserEntity) httpSession.getAttribute("user");
+		String loginUserName = user.getUserName();
+		model.addAttribute("loginUserName",loginUserName);
 		return "thanks.html";
 	}
 

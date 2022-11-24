@@ -38,8 +38,9 @@
 					<a href=""><img src="./images/logo.png" alt=""></a>
 				</div>
 				<ul class="pc-list">
-					<li class="pc-list__item"><a href="">ログイン</a></li>
-					<li class="pc-list__item"><a href="">商品一覧</a></li>
+					   <li class="pc-list__item" th:text="'ようこそ'+${loginUserName}+'さん'"></li>
+					<li class="pc-list__item"><a th:href="@{/itemList}">ホーム</a></li>
+					<li class="pc-list__item"><a th:href="@{/logout}">ログアウト</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -69,7 +70,9 @@
 			</table>
 			<form action="/order" method="post"><input type="hidden" name="cartId"
 					th:value="${cartId}"><button>購入</button></form>
+					<a th:href="@{/itemList}" class="buy">買い物を続ける</a>
 		</div>
+		
 	</main>
 	<footer>
 		<div>

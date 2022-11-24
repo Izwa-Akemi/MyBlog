@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ec.example.entity.AdminEntity;
 import ec.example.entity.CategoryEntity;
+import ec.example.entity.ItemAndBookMarkEntity;
 import ec.example.entity.ItemEntity;
 import ec.example.entity.UserEntity;
 import ec.example.service.AdminService;
 import ec.example.service.CategoryService;
 import ec.example.service.ItemService;
+import ec.example.service.UserItemService;
 import ec.example.service.UserService;
 
 
@@ -32,7 +34,8 @@ public class LoginController {
 	
 	@Autowired
 	private ItemService itemService;
-	
+	@Autowired
+	private UserItemService userItemService;
 	@Autowired
 	private CategoryService categoryService;
 	
@@ -46,7 +49,7 @@ public class LoginController {
 	public String adminAuth(@RequestParam(name="adminname") String adminName,@RequestParam String password,Model model) {
 		AdminEntity adminEntity = adminService.findByAdminNameAndPassword(adminName, password);
 		if(adminEntity == null) {
-			return "login_view.html";
+			return "admin_login.html";
 		}else {
 			session.setAttribute("admin",adminEntity);
 			List<CategoryEntity>categoryList = categoryService.selecFindAll();
@@ -71,8 +74,11 @@ public class LoginController {
 			return "user_login.html";
 		}else {
 			session.setAttribute("user",userEntity);
-			List<ItemEntity>itemList = itemService.findAllItem();
+			List<ItemAndBookMarkEntity>itemList = userItemService.findAllItem();
 			List<CategoryEntity>categoryList = categoryService.selecFindAll();
+			UserEntity user = (UserEntity) session.getAttribute("user");
+			String loginUserName = user.getUserName();
+			model.addAttribute("loginUserName",loginUserName);
 			model.addAttribute("categoryList",categoryList);
 			model.addAttribute("itemList",itemList);
 			return "index.html";

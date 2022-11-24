@@ -42,4 +42,10 @@ public class LogoutController {
 		session.invalidate();
 		return "user_login.html";
 	}
+	//user_idをキーにして，cartからcart_idを取得．
+		@GetMapping("/admin/logout")
+		public String adminLogout() {
+			session.invalidate();
+			return "admin_login.html";
+		}
 }

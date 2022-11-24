@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>商品一覧</title>
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
 <body>
@@ -38,8 +38,12 @@
                     <a href=""><img src="./images/logo.png" alt=""></a>
                 </div>
                 <ul class="pc-list">
-                    <li class="pc-list__item"><a href="">ログイン</a></li>
-                    <li class="pc-list__item"><a href="">商品一覧</a></li>
+                     <ul class="pc-list">
+                    <ul class="pc-list">
+                    <li class="pc-list__item"><a href="/admin/logout">ログアウト</a></li>
+                    <li class="pc-list__item"><a href="/itemmanage">商品一覧</a></li>
+                     <li class="pc-list__item"><a href="/inventorylist">在庫一覧</a></li>
+                       <li class="pc-list__item"><a href="/categoryAll">カテゴリー一覧</a></li>
                 </ul>
             </div>
         </nav>
@@ -53,39 +57,13 @@
                     <th>商品画像</th>
                     <th>在庫</th>
                 </tr>
-                <tr>
-                    <td>鉛筆</td>
-                    <td><img src="./images/stationary_img/pencil.png" alt=""></td>
+                <tr th:each="items:${itemList}">
+                    <td th:text="${items.itemName}">鉛筆</td>
+                    <td><img th:src="@{./itemImage/{item}(item=${items.image})}"></td>
                     <td>
-                        <form action="#" method=""><input type="text"><button>登録</button></form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>鉛筆</td>
-                    <td><img src="./images/stationary_img/pencil.png" alt=""></td>
-                    <td>
-                        <form action="#" method=""><input type="text"><button>登録</button></form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>鉛筆</td>
-                    <td><img src="./images/stationary_img/pencil.png" alt=""></td>
-                    <td>
-                        <form action="#" method=""><input type="text"><button>登録</button></form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>鉛筆</td>
-                    <td><img src="./images/stationary_img/pencil.png" alt=""></td>
-                    <td>
-                        <form action="#" method=""><input type="text"><button>登録</button></form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>鉛筆</td>
-                    <td><img src="./images/stationary_img/pencil.png" alt=""></td>
-                    <td>
-                        <form action="#" method=""><input type="text"><button>登録</button></form>
+                        <form th:action="@{/inventory/update}" th:method="post">
+                        <input type="text" name="stock" th:value ="${items.stock}">
+                        <input type="hidden" name="itemId" th:value ="${items.itemId}"><button>更新</button></form>
                     </td>
                 </tr>
             </table>

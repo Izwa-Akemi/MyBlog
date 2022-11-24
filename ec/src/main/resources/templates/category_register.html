@@ -44,11 +44,13 @@
                 <div class="pc-logo">
                     <a href=""><img src="../images/logo.png" alt=""></a>
                 </div>
-                <ul class="pc-list">
-                    <li class="pc-list__item"><a href="">カテゴリ一覧</a></li>
-                    <li class="pc-list__item"><a href="">投稿記事一覧</a></li>
-                    <li class="pc-list__item"><a href="">管理者一覧</a></li>
-                    <li class="pc-list__item"><a href="">ログアウト</a></li>
+                 <ul class="pc-list">
+                     <ul class="pc-list">
+                    <ul class="pc-list">
+                    <li class="pc-list__item"><a href="/admin/logout">ログアウト</a></li>
+                    <li class="pc-list__item"><a href="/itemmanage">商品一覧</a></li>
+                     <li class="pc-list__item"><a href="/inventorylist">在庫一覧</a></li>
+                       <li class="pc-list__item"><a href="/categoryAll">カテゴリー一覧</a></li>
                 </ul>
             </div>
         </nav>
@@ -62,10 +64,10 @@
                         <div class="register-section-details_flex">
                             <div>カテゴリー名</div>
                             <input type="text" name="categoryName" value="">
-                            <input type="text" name="active" value="1">
+                            <input type="hidden" name="active" value="1">
                         </div>
                         <div class="register-section-details_flex">
-                            <button id="register" class="edit_disable">登録</button>
+                            <button id="register" class="register">登録</button>
                             <button class="back-btn" onclick="history.back();" type="button">戻る</button>
 
                         </div>
