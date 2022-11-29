@@ -43,8 +43,8 @@ public class BookMarkController {
 		return getJson(addFlg);
 	}
 	/**
-	 * 引数のUserDataオブジェクトをJSON文字列に変換する
-	 * @param userDataList UserDataオブジェクトのリスト
+	 * 引数のaddFlgをJSON文字列に変換する
+	 * @param int addFlg
 	 * @return 変換後JSON文字列
 	 */
 	private String getJson(int addFlg){

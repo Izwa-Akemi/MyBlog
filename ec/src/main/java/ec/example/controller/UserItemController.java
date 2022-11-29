@@ -80,8 +80,8 @@ public class UserItemController {
 		return getJson(itemList);
 	}
 	/**
-	 * 引数のUserDataオブジェクトをJSON文字列に変換する
-	 * @param userDataList UserDataオブジェクトのリスト
+	 * 引数のitemListをJSON文字列に変換する
+	 * @param List<ItemAndBookMarkEntity> itemList
 	 * @return 変換後JSON文字列
 	 */
 	private String getJson(List<ItemAndBookMarkEntity> itemList){
